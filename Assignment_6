@@ -31,20 +31,20 @@ $f= AB\overline{D} + B\overline{CD} + A\overline{CD}$
 
 \tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=1pt]
 \begin{tikzpicture}[label distance=5mm]
-\node (D) at (0,0) {D};
-\node (C) at (1,0) {C};
+\node (D) at (-1,0.5) {D};
+\node (C) at (1,0.5) {C};
 \node (B) at (2,-2.5) {B};
 \node (A) at (0.5,-3.5) {A};
     \node[not gate US, draw, rotate=-90] at ($(D)+(0,-1)$) (Not0) {};
     \node[not gate US, draw, rotate=-90] at ($(C)+(0,-1)$) (Not1) {};
-    \node[and gate US, draw, logic gate inputs=nnn] at ($(and0)+(4,-2)$) (and1) {};
+    \node[and gate US, draw, logic gate inputs=nnn] at ($(and1)+(4,-2)$) (and1) {};
     \node[and gate US, draw, logic gate inputs=nnn] at ($((4,-3)$) (and2) {};
     \node[and gate US, draw, logic gate inputs=nnn] at ($((4,-4)$) (and3) {};
     \node[or gate US, draw, logic gate inputs=nnnn, anchor=input 1,2,3] at ($(and3.output)+(3,1)$) (or1) {};
     
     \foreach \i in {2,1,0}
     {\path (x\i) -- coordinate (punt\i) (x\i |- Not\i.input);
-    \draw (punt\i) node[branch] {} -| (Not\i.input);}
+    \draw  node[] {} -| (Not\i.input);}
 
     \draw (Not0.output) |- (and1.input 1);
     \draw (Not0.output) |- (and2.input 1);

@@ -45,8 +45,8 @@ $f= AB\overline{D} + B\overline{CD} + A\overline{CD}$ \\
 \begin{tikzpicture}[label distance=5mm]
 \node (D) at (-1,0) {D};
 \node (C) at (1,0) {C};
-\node (B) at (2,-2.5) {B};
-\node (A) at (0.5,-3.5) {A};
+\node (B) at (2,0) {B};
+\node (A) at (0,0) {A};
    
     \node[nand gate US, draw, logic gate inputs=nnn] at ($(nand1)+(4,-2)$) (nand1) {};
     \node[nand gate US, draw, logic gate inputs=nnn] at ($((4,-4)$) (nand2) {};
@@ -56,21 +56,26 @@ $f= AB\overline{D} + B\overline{CD} + A\overline{CD}$ \\
     
     
 
-    \draw (D) |- (nand1.input 1);
-    \draw (D) |- (nand2.input 1);
-    \draw (D) |- (nand3.input 1);
+    \draw (D) |- (nand1.input 3);
+    \draw (D) |- (nand2.input 3);
+    \draw (D) |- (nand3.input 3);
     \draw (C) |- (nand1.input 2);
     \draw (C) |- (nand2.input 2);
-    \draw (B) |- (nand1.input 3);
+    \draw (B) |- (nand1.input 1);
     \draw (B) |- (nand3.input 2);
-    \draw (A) |- (nand2.input 3);
-    \draw (A) |- (nand3.input 3);
+    \draw (A) |- (nand2.input 1);
+    \draw (A) |- (nand3.input 1);
     \draw (nand1.output) -- (nand4.input 1);
     \draw (nand2.output) -- (nand4.input 2);
     \draw (nand3.output) -- (nand4.input 3);
-
+    \draw (nand4.output) -- node[above]{$\overline{\overline{f}} = f$} ($(nand4) + (2,0)$);
     
-    
+    \node at (nand1.bin 25) [ocirc,scale=1]
+    {}, \node at (nand1.bin 40) [ocirc,scale=1]
+    {}, \node at (nand2.bin 40) [ocirc,scale=1]
+    {}, \node at (nand2.bin 25) [ocirc,scale=1]
+    {}, \node at (nand3.bin 25) [ocirc,scale=1]
+    {};
         
     }
     

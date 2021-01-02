@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{hhline}
+\usepackage{ifthen} 
+\usepackage{lscape}
+\usetikzlibrary{arrows,shapes.gates.logic.US,shapes.gates.logic.IEC,calc}
+\begin{document}
+\title{
+%\logo{
+Assignment 6 
+%}
+}
+\author{Manav Garg}
+
+\date{30 December 2020}
+\maketitle
+
+
+\section{Boolean Expression}
+The Boolean expression of $f = A\overline{B}\overline{C}\overline{D} + \overline{A}B\overline{C}\overline{D} + AB\overline{C}\overline{D} + ABC\overline{D}$ \\ 
+\section{Kmap Expression}
+$f= AB\overline{D} + B\overline{C}\overline{D} + A\overline{C}\overline{D}$
+\subsection{COMBINATIONAL CIRCUIT}
+
+
+\tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=1pt]
+\begin{tikzpicture}[label distance=5mm]
+\node (D) at (-1,0.5) {D};
+\node (C) at (1,0.5) {C};
+\node (B) at (2,-2.5) {B};
+\node (A) at (0.5,-3.5) {A};
+    \node[not gate US, draw, rotate=-90] at ($(D)+(0,-1)$) (Not0) {};
+    \node[not gate US, draw, rotate=-90] at ($(C)+(0,-1)$) (Not1) {};
+    \node[and gate US, draw, logic gate inputs=nnn] at ($(and1)+(4,-2)$) (and1) {};
+    \node[and gate US, draw, logic gate inputs=nnn] at ($((4,-3)$) (and2) {};
+    \node[and gate US, draw, logic gate inputs=nnn] at ($((4,-4)$) (and3) {};
+    \node[or gate US, draw, logic gate inputs=nnnn, anchor=input 1,2,3] at ($(and3.output)+(3,1)$) (or1) {};
+    
+    \foreach \i in {2,1,0}
+    {\path (x\i) -- coordinate (punt\i) (x\i |- Not\i.input);
+    \draw  node[] {} -| (Not\i.input);}
+
+    \draw (Not0.output) |- (and1.input 1);
+    \draw (Not0.output) |- (and2.input 1);
+    \draw (Not0.output) |- (and3.input 1);
+    \draw (Not1.output) |- (and1.input 2);
+    \draw (Not1.output) |- (and2.input 2);
+    \draw (B) |- (and1.input 3);
+    \draw (B) |- (and3.input 2);
+    \draw (A) |- (and2.input 3);
+    \draw (A) |- (and3.input 3);
+    \draw (and1.output) -- (or1.input 1);
+    \draw (and2.output) -- (or1.input 2);
+    \draw (and3.output) -- (or1.input 3);
+    \draw (or1.output) -- node[above]{$f$} ($(or1) + (1,0)$);
+    
+    
+        
+    }
+    
+    
+
+\end{tikzpicture}
+
+
+\end{document}

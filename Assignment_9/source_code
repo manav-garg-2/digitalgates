@@ -1,0 +1,110 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{hhline}
+\usepackage{ifthen} 
+\usepackage{lscape}
+\usetikzlibrary{arrows,shapes.gates.logic.US,shapes.gates.logic.IEC,calc}
+\begin{document}
+\title{
+%\logo{
+Assignment 9
+%}
+}
+\author{Manav Garg}
+
+\date{7 January 2021}
+\maketitle
+
+
+\section{Question}
+Find the output
+
+
+\tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=1pt]
+\begin{tikzpicture}[label distance=5mm]
+
+    
+    \draw[scale=0.4] 
+                (90,3)coordinate (O)
+            --++(30:1)coordinate (A)
+            --++(90:4)coordinate (B)
+            --++(150:1) coordinate (C)
+            --cycle;
+        \draw ($(A)!0.5!(B)$)--++(0:1)node[right]{$F$};
+
+    \draw ($(O)!0.7!(A)$)--++(-90:1)--++(180:2)node[left]{$x$};
+
+    \draw ($(O)!0.3!(A)$)--++(-90:0.5)--++(180:1.75)node[left]{$w$};
+
+    \foreach \y/\t in {0.1/,0.4/} {
+    \draw ($(C)! \y*2 !(O)$)--++(180:1) node[left] {$0 \t$};}
+    
+     \foreach \y/\t in {0.2/,0.3/} {
+    \draw ($(C)! \y*2 !(O)$)--++(180:1) node[left] {$Vcc \t$};}
+    
+    
+
+
+\end{tikzpicture}
+\section{Solution}
+It is a Multiplexer problem So,
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    w & x & F \\
+    \hline
+    0 & 0 & 0 \\
+    \hline
+    0 & 1 & Vcc \\
+    \hline
+    1 & 0 & Vcc \\
+    \hline
+    1 & 1 & 0 \\
+    \hline
+    \end{tabular}
+    
+\end{table}
+\end{table}
+Let's call the output through first multiplexer F \\
+\\
+$F = \Bar{w}\Bar{x}0 + \Bar{w}xVcc +w\Bar{x}Vcc + wx0$\\
+\\
+here Vcc is nothing but 1, so the output through first multiplexer is\\
+$F = \Bar{w}x +w\Bar{x}$\\
+this goes through 2nd multiplexer, So
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    y & z & Y \\
+    \hline
+    0 & 0 & F \\
+    \hline
+    0 & 1 & F \\
+    \hline
+    1 & 0 & 0 \\
+    \hline
+    1 & 1 & 0 \\
+    \hline
+    \end{tabular}
+    
+\end{table}
+\end{table}
+Output $Y =\Bar{y}\Bar{z}F + \Bar{y}zF + y\Bar{z}0 + yz0$\\
+Here F is our output through first multiplexer so\\
+$Y = (\Bar{y}\Bar{z} + \Bar{y}z)(\Bar{w}x + \Bar{x}w)\\
+Y = (\Bar{y})(\Bar{z} + z)(\Bar{w}x + \Bar{x}w)\\
+Y = \Bar{w}x\Bar{y} + w\Bar{x}\Bar{y} ......as(\Bar{z} + z) = 1$\\
+\\
+So, final output is $Y = \Bar{w}x\Bar{y} + w\Bar{x}\Bar{y}
+
+
+
+\end{document}

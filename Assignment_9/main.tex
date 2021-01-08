@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[american]{circuitikz}
+\usepackage{karnaugh-map}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+
+\title{Assignment 9 EC 2014-2-13}
+\author{Manav Garg}
+\date{8 January 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Question:}
+
+\textbf{Find the output}
+
+\begin{figure}[!h]
+\centering
+\scalebox{0.8}{
+\input{mux.tex}
+}
+\caption{\textit{Question figure}}
+\label{mux_2}
+\end{figure}
+
+\textbf{Y=}
+\begin{enumerate}[label=(\Alph*)]
+\item $\bar{w}\bar{x}y + w\bar{x}y$ 
+\item $\bar{w}x\bar{y} + w\bar{x}\bar{y}$
+\item $\bar{w}\bar{x}\bar{y} + \bar{w}xy + wxy$
+\item $none$
+\end{enumerate}
+
+
+\section{Solution:}
+
+
+Since we have $I_0$ and $I_3$ grounded, we can take their boolean equivalents to be 0. Then, we get the following equation:
+
+\begin{equation}
+    Output = \overline{ (w + \overline{x}) (\overline{w} + x) }
+\end{equation}
+
+which can be further simplified (using de Morgan's law) to obtain:
+
+\begin{equation}
+    Output = w \overline{x} + \overline{w} x
+\end{equation}
+
+Again, the same logic can be used to obtain the result of the second MUX. Since in this case, $I_2$ and $I_3$ are grounded; hence by taking their boolean equivalents to be 0, we get the following equation from the second MUX:
+
+\begin{equation}
+    F = \overline{ \overline{(Output. \overline{y}. \overline{z})}. \overline{(Output. \overline{y}. z )}}
+\end{equation}
+
+simplifying, we get:
+
+\begin{equation}
+    F = Output.\overline{y}.\overline{z} + Output.\overline{y}.z
+\end{equation}
+
+after placing the value of $Output$ from eq.(2), and performing a few more manipulations, we get:
+
+\begin{equation}
+    F = (w\overline{x}+\overline{w}x)\overline{y}(z+\overline{z})
+\end{equation}
+
+Since $z$+$\overline{z}$=1, we finally get the desired equation:
+
+\begin{equation}
+    F = (w\bar{x}\bar{y}+\bar{w}x\bar{y})
+\end{equation}
+Hence, The answer of the given question is (B)
+
+
+\section{Truth Table}
+\begin{table}[!h]
+\centering
+\scalebox{1.6}{
+%\resizebox{\columnwidth}{!} {
+\input{table1.tex}
+}
+\caption{Truth Table for eq.(6)}
+\label{table1}
+\end{table}
+\section{K-map for the function Y(w,x,y,z)}
+\hspace{2cm}
+\begin{figure}[h]
+\centering
+\input{kmap.tex}
+\caption{K-map}
+\label{kmap}
+\end{figure}
+
+The expression obtained using the K-map is the same as the one obtained earlier in eq.(6).
+
+
+\end{document}
